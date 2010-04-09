@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <link type="text/css" href="jq/css/south-street/jquery-ui-1.8.custom.css" rel="stylesheet" />
+        <link type="text/css" href="jq/themes/base/jquery.ui.all.css" rel="stylesheet" />
+        <style type="text/css">
+            #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+            #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+            #sortable li span { position: absolute; margin-left: -1.3em; }
+        </style>
+
+        <script type="text/javascript" src="jq/js/jquery-1.4.2.min.js"></script> 
+        <script type="text/javascript" src="jq/js/jquery-ui-1.8.custom.min.js"></script> 
+        <script type="text/javascript" src="jq/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="jq/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="jq/ui/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="jq/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="jq/ui/jquery.ui.sortable.js"></script>
+        <script type="text/javascript" src="jq/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="ui/run.js"></script> 
+        <script type="text/javascript" src="ui/ui.js"></script> 
+        <script type="text/javascript">
+        $(function() {
+            $("#tabs").tabs();
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+            $("button").button();
+            $("button").click(function() { ui.newCmd(); });
+        });
+        </script>
+    </head>
+    <body>
+        <div id="tabs" style="font-size:12px; width: 350px; height:500px;">
+            <ul>
+                <li><a href="#tabs-1">Commands</a></li>
+                <li><a href="#tabs-2">Code</a></li>
+                <li><a href="#tabs-3">Log</a></li>
+            </ul>
+            <div id="tabs-1">
+                <ul id="sortable">
+                </ul>
+            </div>
+            <div id="tabs-2">
+                <p><a href="#" onclick="doClick()">click</a></p>
+            </div>
+            <div id="tabs-3">
+                <p><div id="log"></div></p>
+            </div>
+        </div>
+        <button>New</button>
+    </body>
+</html>
