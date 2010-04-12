@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["bg/dispatch.js", "bg/events.js", "bg/elib.js", "bg/lookup.js", "bg/util.js", "bg/core.js"]
+      "js": ["bg/dispatch.js", "bg/events.js", "bg/elib.js", "bg/lookup.js", "bg/util.js", "bg/core.js", "bg/qunit.js","bg/htmlutils.js","bg/selenium-browserdetect.js", "bg/selenium-browserbot.js", "bg/selenium-api.js"]
     }
   ]
 }
