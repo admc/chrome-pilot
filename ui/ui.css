@@ -1,0 +1,9 @@
+input, textarea
+{
+    font-family: Arial, Sans-Serif;
+    margin-bottom: 5px;
+    display: block;
+    padding: 4px;
+    border: solid 1px #85b1de; 
+    background-color: #EDF2F7;
+}

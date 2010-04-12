@@ -1,7 +1,6 @@
 var core = new function(){};
 
-core.click = function(req){
-    var node = lookupNode(req.loc);
+core.click = function(node){
     events.triggerMouseEvent(element, 'click', true); 
     return true;
 }

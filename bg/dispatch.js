@@ -2,7 +2,10 @@ chrome.extension.onRequest.addListener(
   function(request, sender, sendResponse) {
     var ret = {};
     try {
-        ret.result = core[request.cmd](request);
+        //ret.result = core[request.cmd](request);
+        var r = eval(request.source);
+        ret.result = true;
+        ret.resp = r;
     } catch(err){
         ret.result = false;
         ret.message = err;

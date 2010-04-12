@@ -1,24 +1,36 @@
-<html>
-    <head>
-        <link type="text/css" href="jq/css/south-street/jquery-ui-1.8.custom.css" rel="stylesheet" />
-        <link type="text/css" href="jq/themes/base/jquery.ui.all.css" rel="stylesheet" />
-        <style type="text/css">
-            #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-            #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-            #sortable li span { position: absolute; margin-left: -1.3em; }
-        </style>
+<!DOCTYPE html>
+<html><head>
 
-        <script type="text/javascript" src="jq/js/jquery-1.4.2.min.js"></script> 
-        <script type="text/javascript" src="jq/js/jquery-ui-1.8.custom.min.js"></script> 
-        <script type="text/javascript" src="jq/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="jq/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="jq/ui/jquery.ui.tabs.js"></script>
-        <script type="text/javascript" src="jq/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="jq/ui/jquery.ui.sortable.js"></script>
-        <script type="text/javascript" src="jq/ui/jquery.ui.button.js"></script>
-        <script type="text/javascript" src="ui/run.js"></script> 
-        <script type="text/javascript" src="ui/ui.js"></script> 
-        <script type="text/javascript">
+<link href="ui/bespin/BespinEmbedded.css" type="text/css" rel="stylesheet">
+<link href="ui/ui.css" type="text/css" rel="stylesheet">
+<link type="text/css" href="jq/css/south-street/jquery-ui-1.8.custom.css" rel="stylesheet" />
+<link type="text/css" href="jq/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<script type="text/javascript" src="ui/bespin/BespinEmbedded.js"></script>
+
+<style>
+  body { padding: 20px; font-family: Calibri, Helvetica, Arial; }
+  h1 { border-bottom: 1px solid #ddd; font-size:120%; }
+  .bespin { margin: 0; padding: 0; border: 0; height: 420px; width:310px; border: 1px solid gray; }
+  .displaybutton { margin-top: 1em; }
+    #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+    #sortable li span { position: absolute; margin-left: -1.3em; }
+</style>
+    <script type="text/javascript" src="jq/js/jquery-1.4.2.min.js"></script> 
+    <script type="text/javascript" src="jq/js/jquery-ui-1.8.custom.min.js"></script> 
+    <script type="text/javascript" src="jq/ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.tabs.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.mouse.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.sortable.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.button.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.draggable.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.position.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.resizable.js"></script>
+    <script type="text/javascript" src="jq/ui/jquery.ui.dialog.js"></script>
+    <script type="text/javascript" src="ui/run.js"></script> 
+    <script type="text/javascript" src="ui/ui.js"></script> 
+    <script>
         $(function() {
             $("#tabs").tabs();
             $("#sortable").sortable();
@@ -26,26 +38,28 @@
             $("button").button();
             $("button").click(function() { ui.newCmd(); });
         });
-        </script>
-    </head>
-    <body>
-        <div id="tabs" style="font-size:12px; width: 350px; height:500px;">
-            <ul>
-                <li><a href="#tabs-1">Commands</a></li>
-                <li><a href="#tabs-2">Code</a></li>
-                <li><a href="#tabs-3">Log</a></li>
+    </script>
+</head>
+<body>
+
+
+    <div id="tabs" style="font-size:12px; width: 350px; height:450px;">
+        <ul>
+            <li><a href="#tabs-1">Commands</a></li>
+            <li><a href="#tabs-2">Code</a></li>
+            <li><a href="#tabs-3">Log</a></li>
+        </ul>
+        <div id="tabs-1">
+            <ul id="sortable">
             </ul>
-            <div id="tabs-1">
-                <ul id="sortable">
-                </ul>
-            </div>
-            <div id="tabs-2">
-                <p><a href="#" onclick="doClick()">click</a></p>
-            </div>
-            <div id="tabs-3">
-                <p><div id="log"></div></p>
-            </div>
         </div>
-        <button>New</button>
-    </body>
+        <div id="tabs-2" style="padding:2px; margin:2px">
+        <div id="editor" class="bespin" data-bespinoptions='{ "settings": { "tabstop": 4, "fontsize": 11 }, "syntax": "js", "stealFocus": true }'></div>
+        </div>
+        <div id="tabs-3">
+            <div id="log"></div>
+        </div>
+    </div>
+    <button>New</button>
+</body>
 </html>

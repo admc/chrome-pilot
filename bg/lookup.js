@@ -101,3 +101,6 @@ var lookupNode = function (paramObject, scroll){
   }
   else { throw s + ", failed."; }
 };
+
+//shortcut
+var ln = lookupNode;
