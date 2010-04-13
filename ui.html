@@ -35,8 +35,15 @@
             $("#tabs").tabs();
             $("#sortable").sortable();
             $("#sortable").disableSelection();
-            $("button").button();
-            $("button").click(function() { ui.newCmd(); });
+            $("#new").button();
+            $("#new").click(function() { ui.newCmd(); });
+            $("#play").button();
+            $("#play").click(function() { ui.play(); });
+            $("#clear").button();
+            $("#clear").click(function() { 
+                $("#sortable")[0].innerHTML = "";
+                localStorage.setItem("cp-cmds", JSON.stringify([]));
+            });
         });
         // Load up the cmd state it was left in
         window.onload = function(e){
@@ -57,25 +64,23 @@
     </script>
 </head>
 <body>
-
-
     <div id="tabs" style="font-size:12px; width: 350px; height:450px;">
         <ul>
             <li><a href="#tabs-1">Commands</a></li>
-            <li><a href="#tabs-2">Code</a></li>
+            <li style="visibility:hidden"><a href="#tabs-2">Code</a></li>
             <li><a href="#tabs-3">Log</a></li>
         </ul>
         <div id="tabs-1" style="overflow:auto;height:400px;">
-            <ul id="sortable">
+            <ul id="sortable" style="font-size:10px">
             </ul>
         </div>
-        <div id="tabs-2" style="padding:2px; margin:2px">
-        <div id="editor" class="bespin" data-bespinoptions='{ "settings": { "tabstop": 4, "fontsize": 11 }, "syntax": "js", "stealFocus": true }'></div>
+        <div id="tabs-2" style="padding:2px; margin:2px;visibility:hidden">
+            <div id="editor" class="bespin" data-bespinoptions='{ "settings": { "tabstop": 4, "fontsize": 11 }, "syntax": "js", "stealFocus": true }'></div>
         </div>
         <div id="tabs-3">
             <div id="log" style="overflow:auto;height:400px;"></div>
         </div>
     </div>
-    <button>New</button>
+    <button id="new">New</button> <button id="play">Play</button>&nbsp &nbsp <button id="clear">Clear</button>
 </body>
 </html>

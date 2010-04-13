@@ -6,13 +6,13 @@ var events = new function() {
 
       var isRecentFirefox = (browser.isMozilla);
       if (isRecentFirefox || browser.isKonqueror || browser.isSafari || browser.isOpera) {
-        text = windmill.events.getTextContent(element);
+        text = events.getTextContent(element);
       } 
       else if (element.textContent) { text = element.textContent; } 
       else if (element.innerText) { text = element.innerText; }
 
-      text = windmill.helpers.normalizeNewlines(text);
-      text = windmill.helpers.normalizeSpaces(text);
+      text = normalizeNewlines(text);
+      text = normalizeSpaces(text);
       return text.trim();
     };
 
@@ -36,7 +36,7 @@ var events = new function() {
             var text = "";
             for (var i = 0; i < element.childNodes.length; i++) {
                 var child = element.childNodes.item(i);
-                text += windmill.events.getTextContent(child, childrenPreformatted);
+                text += events.getTextContent(child, childrenPreformatted);
 
             }
             // Handle block elements that introduce newlines
@@ -72,8 +72,8 @@ var events = new function() {
     this.triggerEvent = function(element, eventType, canBubble, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
 
         canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
-        if (element.fireEvent && windmill.browser.isIE) {
-            var evt = windmill.events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
+        if (element.fireEvent) {
+            var evt = events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
             element.fireEvent('on' + eventType, evt);
         }
         else {
@@ -109,16 +109,14 @@ var events = new function() {
             return match[0];
 
         }
-        windmill.err("invalid keySequence");
-
     }
 
     this.triggerKeyEvent = function(element, eventType, keySequence, canBubble, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown) {
-        var keycode = windmill.events.getKeyCodeFromKeySequence(keySequence);
+        var keycode = events.getKeyCodeFromKeySequence(keySequence);
         canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
         //Make sure we don't call fireEvent otuside of IE, mootools adds this to the prototype
-        if (element.fireEvent && windmill.browser.isIE) {
-            var keyEvent = windmill.events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
+        if (element.fireEvent) {
+            var keyEvent = events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
             keyEvent.keyCode = keycode;
             element.fireEvent('on' + eventType, keyEvent);
 
@@ -150,15 +148,14 @@ var events = new function() {
         clientX = clientX ? clientX: 0;
         clientY = clientY ? clientY: 0;
 
-        //LOG.warn("windmill.events.triggerMouseEvent assumes setting screenX and screenY to 0 is ok");
         var screenX = 0;
         var screenY = 0;
 
         canBubble = (typeof(canBubble) == undefined) ? true: canBubble;
 
-        if (element.fireEvent && windmill.browser.isIE) {
+        if (element.fireEvent) {
             //LOG.info("element has fireEvent");
-            var evt = windmill.events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
+            var evt = events.createEventObject(element, controlKeyDown, altKeyDown, shiftKeyDown, metaKeyDown);
             evt.detail = 0;
             evt.button = 1;
             evt.relatedTarget = null;
@@ -178,7 +175,7 @@ var events = new function() {
                 // ideally we could just slide it in as follows in the try-block below, but this normally
                 // doesn't work.  This is why I try to avoid this code path, which is only required if we need to
                 // set attributes on the event (e.g., clientX).
-                try { windmill.testWin().event = evt; }
+                try { window.event = evt; }
                 catch(e) {
                     // getting an "Object does not support this action or property" error.  Save the event away
                     // for future reference.
