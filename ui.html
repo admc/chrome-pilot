@@ -38,6 +38,22 @@
             $("button").button();
             $("button").click(function() { ui.newCmd(); });
         });
+        // Load up the cmd state it was left in
+        window.onload = function(e){
+            //populate the actions UI from local storage
+            if (localStorage.getItem("cp-cmds")){
+               var cmds = JSON.parse(localStorage.getItem("cp-cmds"));
+               if (cmds.length > 0){
+                    //Load the commands into the UI
+                    for (var i=0; i<cmds.length; i++){
+                        ui.addCmd(cmds[i]);
+                    }
+               } 
+            }
+            else {
+                localStorage.setItem("cp-cmds", JSON.stringify([]));
+            }
+        }
     </script>
 </head>
 <body>

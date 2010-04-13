@@ -5,7 +5,7 @@ ui.showOpts = function(e){
     d.id = "option";
     d.title = "Configure Command";
     document.body.appendChild(d);
-    $(d).dialog({height:430, width:320});
+    $(d).dialog({height:430, width:320, resizable: false});
     
     var m = document.createElement('div');
     m.innerHTML = "<b>Meta</b>: ";
@@ -50,19 +50,38 @@ ui.showOpts = function(e){
         e.target.meta = i.value;
         e.target.innerHTML = i.value;
         $(d).dialog('close');
+        var cmds = JSON.parse(localStorage.getItem("cp-cmds"));
+        cmds.push({"meta": e.target.meta, "code": e.target.code });
+        alert(cmds);
+        localStorage.setItem("cp-cmds", JSON.stringify(cmds));
     }, false);
 
     c.appendChild(s);
     d.appendChild(c);
 };
 
-ui.newCmd = function(){
-    var sort = $("#sortable");
+ui.getCmdDOM = function(){
     var cmd = document.createElement('li');
     cmd.className = "ui-state-default";
     cmd.style.width = "290px";
+    return cmd;
+};
+
+ui.newCmd = function(){
+    var sort = $("#sortable");
+    var cmd = ui.getCmdDOM();       
     cmd.innerHTML = "click to configure";
     //cmd.addEventListener("dblclick", doClick, false);
+    cmd.addEventListener("dblclick", ui.showOpts, false);
+    sort.append(cmd);
+};
+
+ui.addCmd = function(obj){
+    var sort = $("#sortable");
+    var cmd = ui.getCmdDOM();
+    cmd.innerHTML = obj.meta;
+    cmd.meta = obj.meta;
+    cmd.code = obj.code;
     cmd.addEventListener("dblclick", ui.showOpts, false);
     sort.append(cmd);
 };
